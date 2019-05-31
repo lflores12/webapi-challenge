@@ -52,4 +52,15 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        res.status(200).json( await Actions.remove(req.params.id))
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Error removing that action"
+        });
+    }
+});
+
 module.exports = router;
