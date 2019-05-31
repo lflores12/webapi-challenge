@@ -40,17 +40,16 @@ router.post('/', async (req, res) => {
     }
 });
 
-
-// function validateProject(req, res, next) {
-//     const project_id = req.params.id;
-  
-//     if (!project_id) {
-//         res.status(400).json ({ 
-//           message: "That project does not exist" });
-//     } else {
-//         next();
-//     }
-//   };
-
+router.put('/:id', async (req, res) => {
+    try {
+        const updatedAction = await Actions.update(req.params.id, req.body);
+        res.status(200).json(updatedAction);
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Error updating action"
+        });
+    }
+});
 
 module.exports = router;
