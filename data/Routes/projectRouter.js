@@ -17,6 +17,18 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+        const project = await Projects.get(req.params.id);
+        res.status(200).json(project);
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({
+            message: "Error retrieving that project"
+        });
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const newProject = await Projects.insert(req.body);
@@ -28,5 +40,7 @@ router.post('/', async (req, res) => {
         });
     }
 });
+
+
 
 module.exports = router;
