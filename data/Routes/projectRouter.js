@@ -73,7 +73,17 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-
+router.get('/:id/actions', async (req, res) => {
+    try {
+    const actions = await Projects.getProjectActions(req.params.id)
+    res.status(200).json(actions);
+    } catch (error){
+        console.log(error);
+        res.status(500).json({
+            message: "Error retrieving actions"
+        });
+    }
+});
 
 
 
